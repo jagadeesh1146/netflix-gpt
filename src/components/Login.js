@@ -23,11 +23,11 @@ const Login = () => {
       if (isSignIn) {
         // Sign in existing user
         const userCredential = await signInWithEmailAndPassword(auth, emailValue, passwordValue);
-        console.log("Signed In:", userCredential.user);
+       // console.log("Signed In:", userCredential.user);
       } else {
         // Sign up new user
         const userCredential = await createUserWithEmailAndPassword(auth, emailValue, passwordValue);
-        console.log("Signed Up:", userCredential.user);
+       // console.log("Signed Up:", userCredential.user);
       }
     } catch (error) {
       setErrMessage(error.message);

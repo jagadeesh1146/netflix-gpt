@@ -10,13 +10,13 @@ const MainContainer = () => {
   // Handle first render (no data yet)
   if (!movies || movies.length === 0) return null;
 
-  const mainMovie = movies[1];
-  console.log(mainMovie)
+  const mainMovie = movies[0];
+ // console.log(mainMovie)
 
   const { overview, title ,id} = mainMovie;
 
   return (
-    <div>
+    <div className="bg-black">
       <VedioName title={title} overview={overview}/>
       <VedioBackground movieId={id} />
     </div>
