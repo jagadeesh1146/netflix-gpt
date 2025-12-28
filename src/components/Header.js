@@ -11,6 +11,7 @@ const Header = () => {
 
   const dispatch = useDispatch()
   const user = useSelector((store) => store.user);
+  const showLanguageOption = useSelector((store)=>store.gpt.showGptSearch)
   const [showSearch, setShowSearch] = useState(false);
 
   const handleSignout = async () => {
@@ -36,13 +37,14 @@ const Header = () => {
 
       {user && (
         <div className="flex items-center gap-4">
+          { showLanguageOption &&
           <select className=" px-4 py-2 bg-red-700 rounded-sm " onChange={handleLanguage}>
             {SUPPORTED_LANGUAGE.map((lang)=>(
               <option key={lang.identifier}value={lang.identifier}>{lang.name}</option>
 
             ))}
-            
-          </select>
+           
+          </select>}
           <button onClick={handleGptSearch} className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800">
             GPT search
           </button>
