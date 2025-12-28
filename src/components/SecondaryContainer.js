@@ -17,6 +17,7 @@ const SecondaryContainer = () => {
       <div className="-mt-32 relative z-30">
         <VideoList title="Now Playing" movies={nowPlayingMovies} />
         <VideoList title="Popular" movies={nowPopularMovies} />
+         <VideoList title="thrillers" movies={nowPopularMovies} />
       </div>
     </div>
   );

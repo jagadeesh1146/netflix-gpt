@@ -1,38 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useSelector } from "react-redux";
-import { LOGO } from "../utils/constants";
+import { LOGO, SUPPORTED_LANGUAGE } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { toggleGptSearchView } from "../utils/GptSlice";
+import { changeLang } from "../utils/configSlice";
 
 const Header = () => {
-  const user = useSelector((store) => store.user); // 👈 get logged-in user from Redux
+
+  const dispatch = useDispatch()
+  const user = useSelector((store) => store.user);
+  const [showSearch, setShowSearch] = useState(false);
 
   const handleSignout = async () => {
     try {
       await signOut(auth);
-      // No need to navigate manually, onAuthStateChanged will handle it
     } catch (error) {
       console.error("Error signing out:", error);
     }
   };
 
+  const handleGptSearch=()=>{
+    dispatch(toggleGptSearchView())
+
+  }
+  const handleLanguage=(e)=>{
+    dispatch(changeLang(e.target.value))
+
+  }
+
   return (
     <div className="absolute w-screen h-16 bg-gradient-to-b from-gray-800 z-10 flex justify-between items-center px-8">
-      {/* ✅ Netflix Logo - always visible */}
-      <img
-        src={LOGO}
-        alt="Netflix Logo"
-        className="w-32"
-      />
+      <img src={LOGO} alt="Netflix Logo" className="w-32" />
 
-      {/* ✅ Show Sign Out only when user exists */}
       {user && (
-        <button
-          onClick={handleSignout}
-          className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800"
-        >
-          Sign Out
-        </button>
+        <div className="flex items-center gap-4">
+          <select className=" px-4 py-2 bg-red-700 rounded-sm " onChange={handleLanguage}>
+            {SUPPORTED_LANGUAGE.map((lang)=>(
+              <option key={lang.identifier}value={lang.identifier}>{lang.name}</option>
+
+            ))}
+            
+          </select>
+          <button onClick={handleGptSearch} className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800">
+            GPT search
+          </button>
+          <button
+            onClick={handleSignout}
+            className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800"
+          >
+            Sign Out
+          </button>
+        </div>
       )}
     </div>
   );

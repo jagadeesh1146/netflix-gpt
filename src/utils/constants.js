@@ -9,4 +9,21 @@
  } 
  
 export const IMG_CDN = "https://image.tmdb.org/t/p/w500/"
+
+export const BG_URL = "https://assets.nflxext.com/ffe/siteui/vlv3/186b5d52-052d-4779-b061-5eed089a99a6/web/IN-en-20251020-TRIFECTA-perspective_2972aef3-a02d-4d1c-9098-126151b3c3ee_small.jpg"
  
+export const SUPPORTED_LANGUAGE=[
+   {
+   identifier:'english',
+   name:'English',
+},
+ {
+   identifier:'telugu',
+   name:'Telugu',
+},
+ {
+   identifier:'japanise',
+   name:'Japanise',
+},
+
+]
